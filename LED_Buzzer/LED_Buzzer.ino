@@ -21,7 +21,7 @@ int numLed = 4;
 int iLed[] = {0, 0, 0, 0};
 bool luci = false;
 
-void IRAM_ATTR interrompi() {
+void IRAM_ATTR handleInterrupt() {
   luci = !luci; // cambia stato
 }
 
@@ -31,7 +31,7 @@ void setup() {
   Serial.begin(9600);
   pinMode (BUZZER, OUTPUT);
   pinMode(PULSANTE, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(PULSANTE), interrompi, RISING);
+  attachInterrupt(digitalPinToInterrupt(PULSANTE), handleInterrupt, RISING);
   for (int i = 0; i < numLed; i++) {
     ledcAttach(led[i], FREQ, RESOLUTION);
     ledcWrite(led[i], 0);   // LED spenti all’inizio
@@ -62,22 +62,11 @@ void loop() {
     
   } else {
     for (int i = 0; i < LUNGHEZZA_MELODIA; i++){
-      tone(BUZZER, melodia[i]); delay(pausa[i]; noTone(BUZZER)
+      tone(BUZZER, melodia[i]); delay(pausa[i]); noTone(BUZZER); delay(pausaNote[i]);
+      if (luci){
+        break;
+      }
     }
-    tone(BUZZER, 330); delay(300); noTone(BUZZER); delay(50); // Mi
-    tone(BUZZER, 330); delay(300); noTone(BUZZER); delay(50); // Mi
-    tone(BUZZER, 330); delay(600); noTone(BUZZER); delay(80); // Mi lunga
-  
-    tone(BUZZER, 330); delay(300); noTone(BUZZER); delay(50); // Mi
-    tone(BUZZER, 330); delay(300); noTone(BUZZER); delay(50); // Mi
-    tone(BUZZER, 330); delay(600); noTone(BUZZER); delay(80); // Mi lunga
-  
-    tone(BUZZER, 330); delay(300); noTone(BUZZER); delay(30); // Mi
-    tone(BUZZER, 392); delay(300); noTone(BUZZER); delay(30); // Sol
-    tone(BUZZER, 262); delay(300); noTone(BUZZER); delay(30); // Do
-    tone(BUZZER, 294); delay(300); noTone(BUZZER); delay(30); // Re
-    tone(BUZZER, 330); delay(600); noTone(BUZZER); delay(60); // Mi
-  
     delay(500); // pausa prima del loop
   }
   
