@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #define LED 5
 #define POTENZIOMETRO 34
 #define FREQ 1000
@@ -5,7 +7,10 @@
 
 void setup() {
   Serial.begin(115200);
-  ledcAttach(LED, FREQ, RES);
+  ledcSetup(0, FREQ, RES);
+  ledcAttachPin(LED, 0);
+  //Versione nuova tutta insieme ma platform io piange
+  //ledcAttach(LED, FREQ, RES);
   
 }
 
