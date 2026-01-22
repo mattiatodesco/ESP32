@@ -7,10 +7,10 @@
 
 void setup() {
   Serial.begin(115200);
-  ledcSetup(0, FREQ, RES);
-  ledcAttachPin(LED, 0);
+  //ledcSetup(0, FREQ, RES);
+  //ledcAttachPin(LED, 0);
   //Versione nuova tutta insieme ma platform io piange
-  //ledcAttach(LED, FREQ, RES);
+  ledcAttach(LED, FREQ, RES);
   
 }
 
@@ -21,6 +21,7 @@ void loop() {
    double percent = read/4095;
    Serial.println(percent * 3.3);
 
+  // Metto il canale e non il led perché uso le librerie vecchie
    ledcWrite(LED, percent * (2^RES));
 
    delay(50);
