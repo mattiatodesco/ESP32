@@ -1,0 +1,21 @@
+#include <LiquidCrystal.h>
+
+// Inizializza la libreria con i pin: RS, E, D4, D5, D6, D7
+// Usiamo i pin mappati precedentemente
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(19, 23, 18, 17, 16, 15);
+ 
+void setup() {
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("ITT Marconi");
+}
+ 
+void loop() {
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(0, 1);
+  // print the number of seconds since reset:
+  lcd.print(millis() / 1000);
+}
