@@ -32,13 +32,16 @@ void loop() {
     Serial.printf("%d reti trovate:\n", n);
     
     for (int i = 0; i < n; ++i) {
+      int valorePercentuale = map(WiFi.RSSI(i), -90, -30, 0, 100);
       // Stampa: SSID, Potenza Segnale (RSSI), Canale e Crittografia
       Serial.print(i + 1);
       Serial.print(": ");
       Serial.print(WiFi.SSID(i));
       Serial.print(" (");
       Serial.print(WiFi.RSSI(i));           // Valore in dBm (es. -50 è ottimo, -90 è scarso)
-      Serial.print(" dBm) Canale: ");
+      Serial.print(" dBm - ");
+      Serial.print(valorePercentuale);
+      Serial.print("%) Canale: ");
 
       // Visualizzazione bssid, ovvero MAC dell'access point
       Serial.print(WiFi.channel(i));
