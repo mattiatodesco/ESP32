@@ -41,13 +41,8 @@ void reconnect() {
     if (client.connect("Toddy", "mqtt222b", "mqtt222b")) {
       Serial.println("connesso");
 
-      // Sottoscrizione al topic
-      client.subscribe("lab/222b/banco/2/postazione/3");
-
     } else {
-      Serial.print("fallita, rc=");
-      Serial.print(client.state());
-      Serial.println(" riprovo tra 5 secondi");
+      Serial.println("fallita, riprovo tra 5 secondi");
       delay(5000);
     }
   }
